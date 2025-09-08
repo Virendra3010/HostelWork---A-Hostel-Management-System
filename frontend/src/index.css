@@ -1,0 +1,387 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  html {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer components {
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 dark:bg-primary-600 dark:hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md;
+  }
+  
+  /* Landing Page Specific Styles */
+  .hero-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  .feature-card {
+    @apply bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1 border border-gray-100 dark:border-gray-700;
+  }
+  
+  .gallery-item {
+    @apply group relative overflow-hidden rounded-xl cursor-pointer;
+  }
+  
+  .gallery-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300;
+  }
+  
+  .stat-number {
+    @apply text-4xl md:text-5xl font-bold mb-2 text-white;
+  }
+  
+  .cta-button {
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-200 hover:shadow-lg;
+  }
+  
+  .cta-button-outline {
+    @apply border-2 border-gray-600 text-gray-300 hover:border-white hover:text-white font-semibold py-3 px-8 rounded-lg transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-medium py-2 px-4 rounded-lg transition-all duration-200 border border-gray-300 dark:border-gray-600;
+  }
+  
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 transition-all duration-200 hover:shadow-md dark:hover:shadow-xl hover:shadow-blue-500/5 dark:hover:shadow-blue-500/10;
+  }
+  
+  .input-field {
+    @apply w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-200;
+  }
+  
+  .dashboard-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  .stat-card {
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-md dark:hover:shadow-xl hover:shadow-blue-500/5 dark:hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1;
+  }
+  
+  .quick-action-btn {
+    @apply flex flex-col items-center p-4 rounded-lg transition-all duration-200 group;
+  }
+  
+  .quick-action-btn:hover {
+    transform: translateY(-2px);
+  }
+  
+  /* Modal Animations */
+  .animate-in {
+    animation: modalFadeIn 0.2s ease-out;
+  }
+  
+  .fade-in {
+    animation: modalFadeIn 0.2s ease-out;
+  }
+  
+  @keyframes modalFadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+  
+  /* Modal overlay fade in */
+  .modal-overlay {
+    animation: overlayFadeIn 0.15s ease-out;
+  }
+  
+  @keyframes overlayFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Password Strength Animation */
+  .strength-bar {
+    transition: width 0.5s ease-out, background-color 0.3s ease;
+  }
+  
+  /* Modal Backdrop Blur */
+  .backdrop-blur-sm {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  
+  /* Modal Z-Index Override */
+  .modal-overlay {
+    z-index: 9999 !important;
+  }
+  
+  /* Ensure modals are always on top */
+  [class*="z-[9999]"] {
+    z-index: 9999 !important;
+  }
+  
+  /* Modal overlay improvements */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 9999;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transform: translateZ(0);
+    will-change: backdrop-filter;
+  }
+  
+  .dark .modal-overlay {
+    background: rgba(0, 0, 0, 0.6);
+  }
+  
+  Ensure modal overlay covers everything including browser chrome
+  .modal-overlay::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: -1;
+  }
+  
+  /* Remove any border artifacts */
+  .modal-container {
+    border: none;
+    outline: none;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    position: relative;
+    z-index: 10000;
+  }
+  
+  .dark .modal-container {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Modal Components */
+  .modal-lg {
+    @apply w-full max-w-4xl border-0;
+  }
+  
+  .modal-md {
+    @apply w-full max-w-2xl border-0;
+  }
+  
+  .modal-sm {
+    @apply w-full max-w-md border-0;
+  }
+  
+  .modal-height-constrained {
+    max-height: 90vh;
+  }
+  
+  .modal-header {
+    @apply px-6 py-4 border-b border-gray-200 dark:border-gray-700;
+  }
+  
+  .modal-content {
+    @apply flex-1 overflow-y-auto px-6 py-4;
+  }
+  
+  .modal-footer {
+    @apply px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800;
+  }
+  
+  .modal-btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors;
+  }
+  
+  .modal-btn-secondary {
+    @apply bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-medium py-2 px-4 rounded-lg transition-colors;
+  }
+  
+  .modal-section-gray {
+    @apply bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg;
+  }
+  
+  .modal-section-blue {
+    @apply bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg;
+  }
+  
+  .modal-section-green {
+    @apply bg-green-50 dark:bg-green-900/20 p-4 rounded-lg;
+  }
+  
+  .modal-section-yellow {
+    @apply bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg;
+  }
+  
+  .modal-section-red {
+    @apply bg-red-50 dark:bg-red-900/20 p-4 rounded-lg;
+  }
+  
+  .modal-section-purple {
+    @apply bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg;
+  }
+  
+  .modal-section-orange {
+    @apply bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg;
+  }
+  
+  /* Dark mode enhancements */
+  .text-primary {
+    @apply text-primary-600 dark:text-primary-400;
+  }
+  
+  .bg-primary {
+    @apply bg-primary-600 dark:bg-primary-700;
+  }
+  
+  .border-primary {
+    @apply border-primary-600 dark:border-primary-500;
+  }
+  
+  .hover-primary {
+    @apply hover:text-primary-600 dark:hover:text-primary-400;
+  }
+  
+  .focus-primary {
+    @apply focus:ring-primary-500 focus:border-primary-500;
+  }
+  
+  /* Modal form elements dark mode */
+  .modal-overlay select,
+  .modal-overlay input,
+  .modal-overlay textarea {
+    @apply dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400;
+  }
+  
+  .modal-overlay select:disabled {
+    @apply dark:bg-gray-600 dark:text-gray-400;
+  }
+  
+  /* Modal checkbox and radio dark mode */
+  .modal-overlay input[type="checkbox"],
+  .modal-overlay input[type="radio"] {
+    @apply dark:bg-gray-700 dark:border-gray-600 dark:text-primary-600 dark:focus:ring-primary-500;
+  }
+  
+  /* Modal label dark mode */
+  .modal-overlay label {
+    @apply dark:text-gray-300;
+  }
+  
+  /* Modal heading dark mode */
+  .modal-overlay h1,
+  .modal-overlay h2,
+  .modal-overlay h3,
+  .modal-overlay h4,
+  .modal-overlay h5,
+  .modal-overlay h6 {
+    @apply dark:text-white;
+  }
+  
+  /* Modal paragraph dark mode */
+  .modal-overlay p {
+    @apply dark:text-gray-300;
+  }
+  
+  /* Modal span dark mode */
+  .modal-overlay span {
+    @apply dark:text-gray-300;
+  }
+  
+  /* Scrollbar styling for dark mode */
+  .dark ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .dark ::-webkit-scrollbar-track {
+    background: #374151;
+    border-radius: 4px;
+  }
+  
+  .dark ::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 4px;
+  }
+  
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+  }
+  
+  /* Light mode scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+  }
+  
+  /* Selection colors */
+  ::selection {
+    background: #3b82f6;
+    color: white;
+  }
+  
+  .dark ::selection {
+    background: #60a5fa;
+    color: #1f2937;
+  }
+  
+  /* Toast notifications styling */
+  [data-hot-toast] {
+    z-index: 99999 !important;
+  }
+  
+  [data-hot-toast] > div {
+    z-index: 99999 !important;
+  }
+  
+  /* Ensure toasts are always visible */
+  .Toaster {
+    z-index: 99999 !important;
+  }
+  
+  .Toaster > div {
+    z-index: 99999 !important;
+  }
+}
